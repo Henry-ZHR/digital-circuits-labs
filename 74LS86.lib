@@ -1,0 +1,32 @@
+*------------------------------------------------------------74LS86----------
+
+* Quad 2-Input Exclusive-OR Gates
+* National LS/S/TTL Logic Data Book, 1989, pages 2-98 TO 2-100
+* jat 8/6/96
+
+.SUBCKT 74LS86 A1 B1 Y1
++ PARAMS: MNTYMXDLY=0 IO_LEVEL=0
+
+U1 XOR DPWR DGND
++ A1 B1 Y1O
++ D0_GATE IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U2 PINDLY(1,0,2) DPWR DGND
++ Y1O
++ A1 B1
++ Y1
++ IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++ PINDLY:
++   Y1 = {
++     CASE(
++           CHANGED(A1,0) & B1=='1 & TRN_LH, DELAY(-1,-1,15NS),
++           CHANGED(B1,0) & A1=='1 & TRN_LH, DELAY(-1,-1,15NS),
++           CHANGED(A1,0) & B1=='1 & TRN_HL, DELAY(-1,-1,15NS),
++           CHANGED(B1,0) & A1=='1 & TRN_HL, DELAY(-1,-1,15NS),
++           CHANGED(A1,0) & B1=='0 & TRN_LH, DELAY(-1,-1,23NS),
++           CHANGED(B1,0) & A1=='0 & TRN_LH, DELAY(-1,-1,23NS),
++           CHANGED(A1,0) & B1=='0 & TRN_HL, DELAY(-1,-1,21NS),
++           CHANGED(B1,0) & A1=='0 & TRN_HL, DELAY(-1,-1,21NS),
++           DELAY(-1,-1,24NS))}
+
+.ENDS 74LS86
