@@ -1,0 +1,154 @@
+* -------------------------------------------------------------------------
+*    Spectrum Software, all rights reserved, copywrite 1994,
+*    Micro-Cap V Digital Library
+*
+*    Parts in this library are modeled at ambient room temperature (TA=25øC)
+*    unless otherwise noted.
+*
+*    DIGITAL LIBRARY range 74195 - 74XXX
+*
+*
+* ----------------------------------------------------------- 74LS197 ------
+*  4-Bit Programmable Counter
+*
+*  The TTL Logic Data Book, 1988, TI Pages 2-655 to 2-662
+*  jds    5/20/94
+*
+.SUBCKT 74LS197 LOADBAR QC C A QA CLK2 DGND CLK1 QB B D QD CLRBAR DPWR
++  params: MNTYMXDLY=0 IO_LEVEL=0
+
+U74197 LOGICEXP(6,9) DPWR DGND
++      LOADBAR CLRBAR A B C D
++      set0 set1 set2 set3 clr0 clr1 clr2 clr3 j0
++      D0_GATE IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++
++    LOGIC:
++      i1 = { ~(CLRBAR & LOADBAR) }
++      set0 = { ~(CLRBAR & A & i1) }
++      set1 = { ~(CLRBAR & B & i1) }
++      set2 = { ~(CLRBAR & C & i1) }
++      set3 = { ~(CLRBAR & D & i1) }
++      clr0 = {~(set0 & i1) }
++      clr1 = {~(set1 & i1) }
++      clr2 = {~(set2 & i1) }
++      clr3 = {~(set3 & i1) }
++      j0 = {(CLRBAR & LOADBAR)}
+
+uf0  JKff(1)  DPWR DGND
++    set0 clr0 CLK1 j0 j0 QA_O qabar
++    D0_EFF IO_LS
+
+uf1  JKff(1)  DPWR DGND
++    set1 clr1 CLK2  j0 j0 QB_O qbbar
++    D0_EFF IO_LS
+
+uf2  JKff(1)  DPWR DGND
++    set2 clr2 QB_O j0 j0 QC_O qcbar
++    D0_EFF IO_LS
+
+uf3  JKff(1)  DPWR DGND
++    set3 clr3 QC_O j0 j0 QD_O qdbar
++    D0_EFF IO_LS
+
+Udly PINDLY (4,0,8) DPWR DGND
++    QA_O QB_O QC_O QD_O
++    CLK1 CLK2 CLRBAR A B C D LOADBAR
++    QA QB QC QD
++    IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++
++    BOOLEAN:
++     CK1= {CHANGED_HL(CLK1,0)}
++     CK2= {CHANGED_HL(CLK2,0)}
++     CLEAR = { CHANGED_HL(CLRBAR,0) }
++     LOAD = { CHANGED_HL(LOADBAR,0) }
++     DATA = { CHANGED(A,0) | CHANGED(B,0) | CHANGED(C,0) | CHANGED(D,0) }
++
++    PINDLY:
++       QA = {
++            CASE(
++                 CLEAR & TRN_HL, DELAY(-1,34ns,51ns),
++                 CK1 & TRN_LH, DELAY(-1,8ns,15ns),
++                 CK1 & TRN_HL, DELAY(-1,14ns,21ns),
++                 DATA & TRN_LH, DELAY(-1,18ns,27ns),
++                 DATA & TRN_HL, DELAY(-1,29ns,44ns),
++                 LOAD & TRN_LH, DELAY(-1,26ns,39ns),
++                 LOAD & TRN_HL, DELAY(-1,30ns,45ns),
++                 DELAY(-1,35ns,52ns)
++                )
++            }
++       QB  = {
++            CASE(
++                 CLEAR & TRN_HL, DELAY(-1,34ns,51ns),
++                 CK2 & TRN_LH, DELAY(-1,12ns,19ns),
++                 CK2 & TRN_HL, DELAY(-1,23ns,35ns),
++                 DATA & TRN_LH, DELAY(-1,18ns,27ns),
++                 DATA & TRN_HL, DELAY(-1,29ns,44ns),
++                 LOAD & TRN_LH, DELAY(-1,26ns,39ns),
++                 LOAD & TRN_HL, DELAY(-1,30ns,45ns),
++                 DELAY(-1,35ns,52ns)
++                )
++            }
++       QC  = {
++            CASE(
++                 CLEAR & TRN_HL, DELAY(-1,34ns,51ns),
++                 CK2 & TRN_LH, DELAY(-1,34ns,51ns),
++                 CK2 & TRN_HL, DELAY(-1,42ns,63ns),
++                 DATA & TRN_LH, DELAY(-1,18ns,27ns),
++                 DATA & TRN_HL, DELAY(-1,29ns,44ns),
++                 LOAD & TRN_LH, DELAY(-1,26ns,39ns),
++                 LOAD & TRN_HL, DELAY(-1,30ns,45ns),
++                 DELAY(-1,35ns,52ns)
++                )
++            }
++       QD  = {
++            CASE(
++                 CLEAR & TRN_HL, DELAY(-1,34ns,51ns),
++                 CK2 & TRN_LH, DELAY(-1,55ns,78ns),
++                 CK2 & TRN_HL, DELAY(-1,63ns,95ns),
++                 DATA & TRN_LH, DELAY(-1,18ns,27ns),
++                 DATA & TRN_HL, DELAY(-1,29ns,44ns),
++                 LOAD & TRN_LH, DELAY(-1,26ns,39ns),
++                 LOAD & TRN_HL, DELAY(-1,30ns,45ns),
++                 DELAY(-1,64ns,96ns)
++                )
++            }
+
+Ucnstr CONSTRAINT(8) DPWR DGND
++          CLRBAR LOADBAR CLK1 CLK2 A B C D
++          IO_LS
++
++      FREQ:
++         NODE = CLK1
++         MAXFREQ = 30MEG
++      FREQ:
++         NODE = CLK2
++         MAXFREQ = 15MEG
++      WIDTH:
++         NODE = CLK1
++         MIN_HI = 20ns
++         MIN_LO = 20ns
++      WIDTH:
++         NODE = CLK2
++         MIN_HI = 30ns
++         MIN_LO = 30ns
++      WIDTH:
++         NODE = CLRBAR
++         MIN_LO = 15ns
++      WIDTH:
++         NODE = LOADBAR
++         MIN_LO = 20ns
++      SETUP_HOLD:
++        CLOCK HL = LOADBAR
++        DATA(4) = A B C D
++        SETUPTIME_HI = 10ns
++        SETUPTIME_LO = 15ns
++      SETUP_HOLD:
++        CLOCK HL = CLK1
++        DATA(2) = CLRBAR LOADBAR
++        SETUPTIME_LO = 30ns
++      SETUP_HOLD:
++        CLOCK HL = CLK2
++        DATA(2) = CLRBAR LOADBAR
++        SETUPTIME_LO = 50ns
+
+.ENDS 74LS197
