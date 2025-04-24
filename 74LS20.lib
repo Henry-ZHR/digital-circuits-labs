@@ -1,0 +1,16 @@
+* ----------------------------------------------------------- 74LS20 ------
+*  Dual 4-Input Nand Gates 
+*
+*  The TTL Logic Data Book, 1988, TI Pages 2-95 to 2-99
+*  bss    2/4/94
+*
+.SUBCKT 74LS20 1A 1B NC 1C 1D 1Y
++ params: MNTYMXDLY=0 IO_LEVEL=0
+
+U1 nand(4) VCC GND
++ 1A 1B 1C 1D 1Y
++ DLY_LS20 IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+.model DLY_LS20 ugate (tplhTY=9ns tplhMX=15ns tphlTY=10ns tphlMX=15ns)
+
+.ENDS 74LS20

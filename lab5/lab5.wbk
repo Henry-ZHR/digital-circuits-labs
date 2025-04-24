@@ -1,0 +1,66 @@
+{
+  "last_sch_text_sim_command": "",
+  "tabs": [
+    {
+      "analysis": "TRAN",
+      "commands": [
+        ".tran 100p 1.6m 0 10n uic",
+        ".kicad adjustpaths",
+        ".save all"
+      ],
+      "dottedSecondary": true,
+      "fixedY1scale": {
+        "max": 30.0,
+        "min": 0.0
+      },
+      "margins": {
+        "bottom": 45,
+        "left": 70,
+        "right": 70,
+        "top": 30
+      },
+      "measurements": [],
+      "showGrid": true,
+      "traces": [
+        {
+          "color": "rgb(55, 126, 184)",
+          "signal": "V(C_B_in)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(152, 78, 163)",
+          "signal": "V(B) + 5",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(255, 127, 0)",
+          "signal": "V(A) + 10",
+          "trace_type": 1
+        },
+        {
+          "color": "rgb(255, 255, 51)",
+          "signal": "V(select) + 15",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(166, 86, 40)",
+          "signal": "V(S_D) + 20",
+          "trace_type": 1
+        },
+        {
+          "color": "rgb(77, 175, 74)",
+          "signal": "V(C_B_out) + 25",
+          "trace_type": 1
+        }
+      ]
+    }
+  ],
+  "user_defined_signals": [
+    "V(B) + 5",
+    "V(A) + 10",
+    "V(select) + 15",
+    "V(S_D) + 20",
+    "V(C_B_out) + 25"
+  ],
+  "version": 6
+}
