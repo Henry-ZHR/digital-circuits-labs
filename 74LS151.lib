@@ -1,0 +1,78 @@
+* -------------------------------------------------------------------------
+*    Spectrum Software, all rights reserved, copywrite 1994,
+*    Micro-Cap V Digital Library
+*
+*    Parts in this library are modeled at ambient room temperature (TA=25øC)
+*    unless otherwise noted.
+*
+*    DIGITAL LIBRARY range 74150-74166
+*
+*
+* ----------------------------------------------------------- 74LS151 ------
+*  Data Selectors/Multiplexers
+*
+*  The TTL Logic Data Book, 1988, TI Pages 2-457 to 2-464
+*  jds    2/16/94
+*
+.SUBCKT 74LS151 D3 D2 D1 D0 Y W GBAR DGND C B A D7 D6 D5 D4 DPWR
++  params: MNTYMXDLY=0 IO_LEVEL=0
+
+U74LS151 LOGICEXP (12,2) DPWR DGND
++        D0 D1 D2 D3 D4 D5 D6 D7 A B C GBAR Y_O W_O
++        D0_GATE IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++
++    LOGIC:
++      g = {(~GBAR)}
++      abar = {(~A)}
++      bbar = {(~B)}
++      cbar = {(~C)}
++      a0 = {(D0 & abar & bbar & cbar & g)}
++      a1 = {(D1 & A & bbar & cbar & g)}
++      a2 = {(D2 & abar & B & cbar & g)}
++      a3 = {(D3 & A & B & cbar & g)}
++      a4 = {(D4 & abar & bbar & C & g)}
++      a5 = {(D5 & A & bbar & C & g)}
++      a6 = {(D6 & abar & B & C & g)}
++      a7 = {(D7 & A & B & C & g)}
++
++      W_O = { ~( a0 | a1 | a2 | a3 | a4 | a5 | a6 | a7 ) }
++      Y_O = { (~W_O) }
+
+Udly PINDLY (2,0,12) DPWR DGND
++    W_O Y_O
++    D0 D1 D2 D3 D4 D5 D6 D7
++    A B C GBAR
++    W Y
++    IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++
++    BOOLEAN:
++       SELECT= { CHANGED(A,0) | CHANGED(B,0) | CHANGED(C,0) }
++       STROBE= { CHANGED(GBAR,0) }
++       DATA={ CHANGED(D0,0) | CHANGED(D1,0) | CHANGED(D2,0) | CHANGED(D3,0) |
++              CHANGED(D4,0) | CHANGED(D5,0) | CHANGED(D6,0) | CHANGED(D7,0) }
++
++    PINDLY:
++       W = {
++            CASE(
++                 SELECT & TRN_LH, DELAY(-1,14ns,23ns),
++                 SELECT & TRN_HL, DELAY(-1,20ns,32ns),
++                 STROBE & TRN_LH, DELAY(-1,15ns,24ns),
++                 STROBE & TRN_HL, DELAY(-1,18ns,30ns),
++                 DATA & TRN_LH, DELAY(-1,13ns,21ns),
++                 DATA & TRN_HL, DELAY(-1,12ns,20ns),
++                 DELAY(-1,20ns,33ns)
++                )
++            }
++       Y = {
++            CASE(
++                 SELECT & TRN_LH, DELAY(-1,27ns,43ns),
++                 SELECT & TRN_HL, DELAY(-1,18ns,30ns),
++                 STROBE & TRN_LH, DELAY(-1,26ns,42ns),
++                 STROBE & TRN_HL, DELAY(-1,20ns,32ns),
++                 DATA & TRN_LH, DELAY(-1,20ns,32ns),
++                 DATA & TRN_HL, DELAY(-1,16ns,26ns),
++                 DELAY(-1,28ns,44ns)
++                )
++            }
+
+.ENDS 74LS151

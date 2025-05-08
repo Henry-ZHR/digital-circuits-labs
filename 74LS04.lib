@@ -1,0 +1,16 @@
+* ----------------------------------------------------------- 74LS04 ------
+*  Hex Inverters
+*
+*  The TTL Logic Data Book, 1988, TI Pages 2-25 to 2-29
+*  bss    2/3/94
+*
+.SUBCKT 74LS04  1A  1Y
++     params: MNTYMXDLY=0 IO_LEVEL=0
+
+U1 inv VCC GND
++     1A 1Y
++     DLY_LS04 IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+.model DLY_LS04 ugate (tplhTY=9ns tplhMX=15ns tphlTY=10ns tphlMX=15ns)
+
+.ENDS  74LS04

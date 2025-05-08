@@ -1,3 +1,4 @@
 lab*/lab*-backups/
 ~*.lck
-_autosave*
+*auto*save*
+report
