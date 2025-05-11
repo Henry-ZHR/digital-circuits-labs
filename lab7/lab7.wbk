@@ -1,0 +1,102 @@
+{
+  "last_sch_text_sim_command": "",
+  "tabs": [
+    {
+      "analysis": "TRAN",
+      "commands": [
+        ".tran 1n 3.2m 0 1u uic",
+        ".kicad adjustpaths",
+        ".save all"
+      ],
+      "dottedSecondary": true,
+      "fixedY1scale": {
+        "max": 5.0,
+        "min": -55.0
+      },
+      "margins": {
+        "bottom": 45,
+        "left": 70,
+        "right": 70,
+        "top": 30
+      },
+      "measurements": [],
+      "showGrid": true,
+      "traces": [
+        {
+          "color": "rgb(152, 78, 163)",
+          "signal": "V(CP0)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(255, 127, 0)",
+          "signal": "V(A) - 5",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(247, 129, 191)",
+          "signal": "V(DS1) - 55",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(255, 255, 51)",
+          "signal": "V(B) - 10",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(166, 86, 40)",
+          "signal": "V(C) - 15",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(229, 196, 148)",
+          "signal": "V(DS8) - 20",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(255, 217, 47)",
+          "signal": "V(DS7) - 25",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(166, 216, 84)",
+          "signal": "V(DS6) - 30",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(231, 138, 195)",
+          "signal": "V(DS5) - 35",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(141, 160, 203)",
+          "signal": "V(DS4) - 40",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(252, 141, 98)",
+          "signal": "V(DS3) - 45",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(102, 194, 165)",
+          "signal": "V(DS2) - 50",
+          "trace_type": 257
+        }
+      ]
+    }
+  ],
+  "user_defined_signals": [
+    "V(A) - 5",
+    "V(B) - 10",
+    "V(C) - 15",
+    "V(DS8) - 20",
+    "V(DS7) - 25",
+    "V(DS6) - 30",
+    "V(DS5) - 35",
+    "V(DS4) - 40",
+    "V(DS3) - 45",
+    "V(DS2) - 50",
+    "V(DS1) - 55"
+  ],
+  "version": 6
+}
