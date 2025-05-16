@@ -1,0 +1,30 @@
+* ----------------------------------------------------------- 74LS73A ------
+*  Dual J-K Flip-Flops With Clear
+*
+*  The TTL Logic Data Book, 1988, TI Pages 2-229 to 2-233
+*  bss    2/23/94
+*
+.SUBCKT 74LS73A 1CLK 1CLRBAR 1K DPWR 2CLK 2CLRBAR 2J 2QBAR 2Q 2K DGND 1Q 1QBAR 1J
++ params: MNTYMXDLY=0 IO_LEVEL=0
+
+U1 JKFF(1)
++ DPWR DGND
++ $D_HI 1CLRBAR 1CLK
++ 1J 1K 1Q 1QBAR
++ DLY_LS73 IO_LS
++ MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U2 JKFF(1)
++ DPWR DGND
++ $D_HI 2CLRBAR 2CLK
++ 2J 2K 2Q 2QBAR
++ DLY_LS73 IO_LS
++ MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+.model DLY_LS73 ueff(tppcqlhTY=15ns tppcqlhMX=20ns
++                    tppcqhlTY=15ns tppcqhlMX=20ns
++                    tpclkqlhTY=15ns tpclkqlhMX=20ns
++                    tpclkqhlTY=15ns tpclkqhlMX=20ns
++                    twpclMN=20ns twclkhMN=20ns tsudclkMN=20ns tsupcclkhMN=20ns)
+
+.ENDS 74LS73A

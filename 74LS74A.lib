@@ -1,0 +1,20 @@
+* ----------------------------------------------------------- 74LS74A ------
+*  Dual D-Type Positive Edge Triggered Flip-Flops With  Preset And Clear
+*
+*  The TTL Logic Data Book, 1988, TI Pages 2-235 to 2-240
+*  bss    2/24/94
+*
+.SUBCKT 74LS74A 1CLRBAR 1D 1CLK 1PREBAR 1Q 1QBAR
++ params: MNTYMXDLY=0 IO_LEVEL=0
+
+U1 DFF(1) VCC GND
++ 1PREBAR 1CLRBAR 1CLK 1D 1Q 1QBAR
++ DLY_LS74 IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+.model DLY_LS74 ueff(tppcqlhTY=13ns tppcqlhMX=25ns
++                    tppcqhlTY=25ns tppcqhlMX=40ns
++                    tpclkqlhTY=13ns tpclkqlhMX=25ns
++                    tpclkqhlTY=25ns tpclkqhlMX=40ns
++                    twpclMN=25ns twclkhMN=25ns tsudclkMN=20ns thdclkMN=5ns)
+
+.ENDS 74LS74A

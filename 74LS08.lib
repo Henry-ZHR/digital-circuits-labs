@@ -1,0 +1,16 @@
+* ----------------------------------------------------------- 74LS08 ------
+*  Quad 2-Input And Gates   
+*
+*  The TTL Logic Data Book, 1988, TI Pages 2-41 to 2-45
+*  bss    2/3/94
+*
+.SUBCKT 74LS08 1A 1B 1Y
++ params: MNTYMXDLY=0 IO_LEVEL=0
+
+U1 and(2) VCC GND
++ 1A 1B 1Y
++ DLY_LS08 IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+.model DLY_LS08 ugate (tplhTY=8ns tplhMX=15ns tphlTY=10ns tphlMX=20ns)
+
+.ENDS 74LS08
