@@ -1,0 +1,55 @@
+* ----------------------------------------------------------- 74LS157 ------
+*  Quadruple 2-Line to 1-Line Data Selectors/Multiplexers
+*
+*  The TTL Logic Data Book, 1988, Texas Instruments
+*  jds    3/01/94     Pages 2-483 to 2-488
+*
+.SUBCKT 74LS157 ABAR/B 1A 1B 1Y 2A 2B 2Y GND 3Y 3B 3A 4Y 4B 4A GBAR VCC
++  params: MNTYMXDLY=0 IO_LEVEL=0
+
+U74LS157 LOGICEXP (10,4) VCC GND
++      1A 1B 2A 2B 3A 3B 4A 4B ABAR/B GBAR
++      1Y_O 2Y_O 3Y_O 4Y_O
++      D0_GATE IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++
++    LOGIC:
++      g = {(~GBAR)}
++      a/bbar = {(~ABAR/B)}
++      i1a = { (1A & a/bbar & g) }
++      i1b = { (1B & ABAR/B & g) }
++      i2a = { (2A & a/bbar & g) }
++      i2b = { (2B & ABAR/B & g) }
++      i3a = { (3A & a/bbar & g) }
++      i3b = { (3B & ABAR/B & g) }
++      i4a = { (4A & a/bbar & g) }
++      i4b = { (4B & ABAR/B & g) }
++      1Y_O = { (i1a | i1b) }
++      2Y_O = { (i2a | i2b) }
++      3Y_O = { (i3a | i3b) }
++      4Y_O = { (i4a | i4b) }
+
+Udly PINDLY (4,0,10) VCC GND
++      1Y_O 2Y_O 3Y_O 4Y_O
++      1A 1B 2A 2B 3A 3B 4A 4B ABAR/B GBAR
++      1Y 2Y 3Y 4Y
++      IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++
++    BOOLEAN:
++      DATA= { CHANGED(1A,0) | CHANGED(1B,0) | CHANGED(2A,0) | CHANGED(2B,0) |
++              CHANGED(3A,0) | CHANGED(3B,0) | CHANGED(4A,0) | CHANGED(4B,0) }
++      STROBE= { CHANGED(GBAR,0) }
++      SELECT= { CHANGED(ABAR/B,0) }
++
++    PINDLY:
++      1Y 2Y 3Y 4Y= {
++            CASE(
++                 DATA , DELAY(-1,9ns,14ns),
++                 STROBE & TRN_LH, DELAY(-1,13ns,20ns),
++                 STROBE & TRN_HL, DELAY(-1,14ns,21ns),
++                 SELECT & TRN_LH, DELAY(-1,15ns,23ns),
++                 SELECT & TRN_HL, DELAY(-1,18ns,27ns),
++                 DELAY(-1,19ns,28ns)
++                )
++            }
+
+.ENDS 74LS157
