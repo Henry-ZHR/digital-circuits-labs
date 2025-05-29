@@ -4,14 +4,14 @@
     {
       "analysis": "TRAN",
       "commands": [
-        ".tran 1n 3.2m 0 1u uic",
+        ".tran 1n 5m 0 1u uic",
         ".kicad adjustpaths",
         ".save all"
       ],
       "dottedSecondary": true,
       "fixedY1scale": {
         "max": 5.0,
-        "min": -40.0
+        "min": -45.0
       },
       "margins": {
         "bottom": 45,
@@ -28,57 +28,63 @@
           "trace_type": 257
         },
         {
+          "color": "rgb(255, 255, 51)",
+          "signal": "V(D/_U) - 5",
+          "trace_type": 257
+        },
+        {
           "color": "rgb(166, 86, 40)",
-          "signal": "V(Qa_0) - 5",
+          "signal": "V(Qa_0) - 10",
           "trace_type": 257
         },
         {
           "color": "rgb(247, 129, 191)",
-          "signal": "V(Qa_1) - 10",
+          "signal": "V(Qa_1) - 15",
           "trace_type": 257
         },
         {
           "color": "rgb(102, 194, 165)",
-          "signal": "V(Qa_2) - 15",
+          "signal": "V(Qa_2) - 20",
           "trace_type": 257
         },
         {
           "color": "rgb(252, 141, 98)",
-          "signal": "V(Qa_3) - 20",
+          "signal": "V(Qa_3) - 25",
           "trace_type": 257
         },
         {
           "color": "rgb(55, 126, 184)",
-          "signal": "V(Qs_0) - 25",
+          "signal": "V(Qs_0) - 30",
           "trace_type": 257
         },
         {
           "color": "rgb(77, 175, 74)",
-          "signal": "V(Qs_1) - 30",
+          "signal": "V(Qs_1) - 35",
           "trace_type": 257
         },
         {
           "color": "rgb(152, 78, 163)",
-          "signal": "V(Qs_2) - 35",
+          "signal": "V(Qs_2) - 40",
           "trace_type": 257
         },
         {
           "color": "rgb(255, 127, 0)",
-          "signal": "V(Qs_3) - 40",
+          "signal": "V(Qs_3) - 45",
           "trace_type": 257
         }
       ]
     }
   ],
   "user_defined_signals": [
-    "V(Qa_0) - 5",
-    "V(Qa_1) - 10",
-    "V(Qa_2) - 15",
-    "V(Qa_3) - 20",
-    "V(Qs_0) - 25",
-    "V(Qs_1) - 30",
-    "V(Qs_2) - 35",
-    "V(Qs_3) - 40"
+    "V(D/_U) - 5",
+    "V(Qa_0) - 10",
+    "V(Qa_1) - 15",
+    "V(Qa_2) - 20",
+    "V(Qa_3) - 25",
+    "V(Qs_0) - 30",
+    "V(Qs_1) - 35",
+    "V(Qs_2) - 40",
+    "V(Qs_3) - 45"
   ],
   "version": 6
 }
