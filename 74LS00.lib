@@ -1,0 +1,16 @@
+* ----------------------------------------------------------- 74LS00 ------
+*  Quad 2-Input Nand Gates
+*
+*  The TTL Logic Data Book, 1988, TI Pages 2-3 to 2-7
+*  bss    2/2/94
+*
+.SUBCKT 74LS00 1A 1B 1Y
++ params: MNTYMXDLY=0 IO_LEVEL=0
+
+U1 nand(2) VCC GND
++ 1A 1B 1Y
++ DLY_LS00 IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+.model DLY_LS00 ugate (tplhTY=9ns tplhMX=15ns tphlTY=10ns tphlMX=15ns)
+
+.ENDS 74LS00

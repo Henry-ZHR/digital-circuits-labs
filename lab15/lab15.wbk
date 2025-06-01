@@ -1,0 +1,108 @@
+{
+  "last_sch_text_sim_command": "",
+  "tabs": [
+    {
+      "analysis": "TRAN",
+      "commands": [
+        ".tran 1n 7m 0 1u uic",
+        ".kicad adjustpaths",
+        ".save all"
+      ],
+      "dottedSecondary": true,
+      "fixedY1scale": {
+        "max": 5.0,
+        "min": -60.0
+      },
+      "margins": {
+        "bottom": 45,
+        "left": 70,
+        "right": 70,
+        "top": 30
+      },
+      "measurements": [],
+      "showGrid": true,
+      "traces": [
+        {
+          "color": "rgb(228, 26, 28)",
+          "signal": "V(CLK)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(55, 126, 184)",
+          "signal": "V(Q0_0) - 5",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(166, 216, 84)",
+          "signal": "V(Q2_2) - 55",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(77, 175, 74)",
+          "signal": "V(Q0_1) - 10",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(255, 217, 47)",
+          "signal": "V(Q2_3) - 60",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(152, 78, 163)",
+          "signal": "V(Q0_2) - 15",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(255, 255, 51)",
+          "signal": "V(Q0_3) - 20",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(166, 86, 40)",
+          "signal": "V(Q1_0) - 25",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(247, 129, 191)",
+          "signal": "V(Q1_1) - 30",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(102, 194, 165)",
+          "signal": "V(Q1_2) - 35",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(252, 141, 98)",
+          "signal": "V(Q1_3) - 40",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(141, 160, 203)",
+          "signal": "V(Q2_0) - 45",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(231, 138, 195)",
+          "signal": "V(Q2_1) - 50",
+          "trace_type": 257
+        }
+      ]
+    }
+  ],
+  "user_defined_signals": [
+    "V(Q0_0) - 5",
+    "V(Q0_1) - 10",
+    "V(Q0_2) - 15",
+    "V(Q0_3) - 20",
+    "V(Q1_0) - 25",
+    "V(Q1_1) - 30",
+    "V(Q1_2) - 35",
+    "V(Q1_3) - 40",
+    "V(Q2_0) - 45",
+    "V(Q2_1) - 50",
+    "V(Q2_2) - 55",
+    "V(Q2_3) - 60"
+  ],
+  "version": 6
+}

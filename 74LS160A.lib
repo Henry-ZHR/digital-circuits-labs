@@ -1,0 +1,110 @@
+* ----------------------------------------------------------- 74LS160A ------
+*  Synchronous 4-Bit Decade Counter w/ Async Clear
+*
+*  The TTL Logic Data Book, 1988, TI Pages 2-493 to 2-513
+*  jds    3/24/94
+*
+.SUBCKT 74LS160A CLRBAR CLK A B C D ENP GND LOADBAR ENT QD QC QB QA RCO VCC
++ params: MNTYMXDLY=0 IO_LEVEL=0
+
+U74LS160A LOGICEXP (13, 10) VCC GND
++        A B C D CLK ENP ENT LOADBAR QA_O QB_O QC_O QD_O QDBAR_O
++        RCO_O ja jb jc jd ka kb kc kd clkbar
++        D0_GATE IO_LS IO_LEVEL={IO_LEVEL}
++
++    LOGIC:
++      clkbar = { (~CLK) }
++      pnt = { ( ENP & ENT) }
++      load = { (~LOADBAR) }
++      RCO_O = { ( ENT & QA_O & QD_O ) }
++      ia2 = { (~(load & A)) }
++      ia1 = { (~(load & ia2)) }
++      ia3 = { (pnt | load) }
++      ib2 = { (~(load & B )) }
++      ib1 = { (~(ib2 & load)) }
++      ib3 = { (load | (QA_O & pnt & QDBAR_O)) }
++      ic2 = { (~(load & C)) }
++      ic1 = { (~(ic2 & load)) }
++      ic3 = { (load | (pnt & QA_O & QB_O)) }
++      id2 = { (~(load & D)) }
++      id1 = { (~(load & id2)) }
++      id3 = { ( load | ((pnt & QA_O & QB_O & QC_O) | (pnt & QA_O & QD_O))) }
++      ja  = { (ia1 & ia3) }
++      jb  = { (ib1 & ib3) }
++      jc  = { (ic1 & ic3) }
++      jd  = { (id1 & id3) }
++      ka  = { (ia2 & ia3) }
++      kb  = { (ib2 & ib3) }
++      kc  = { (ic2 & ic3) }
++      kd  = { (id2 & id3) }
+
+
+uf0  JKff(4)  VCC GND
++    $D_HI CLRBAR clkbar
++    ja jb jc jd ka kb kc kd
++    QA_O QB_O QC_O QD_O qabar qbbar qcbar QDBAR_O
++    D0_EFF IO_LS
+
+Udly PINDLY (5,0,4) VCC GND
++    QA_O QB_O QC_O QD_O RCO_O
++    CLRBAR CLK ENT LOADBAR
++    QA QB QC QD RCO
++    IO_LS MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++
++    BOOLEAN:
++       CLOCK= { CHANGED(CLK,0) }
++       CLEAR= { CHANGED(CLRBAR,0) }
++       ENABLET = { CHANGED(ENT,0) }
++       LOADRisHIGH = { (LOADBAR == '1)}
++       LOADRisLO = { (LOADBAR == '0)}
++
++    PINDLY:
++       RCO = {
++              CASE(
++                   ENABLET & TRN_HL, DELAY(-1,9ns,14ns),
++                   ENABLET & TRN_LH, DELAY(-1,9ns,14ns),
++                   CLOCK & TRN_LH, DELAY(-1,20ns,35ns),
++                   CLOCK & TRN_HL, DELAY(-1,18ns,35ns),
++                   DELAY(-1,21ns,36ns)
++                   )
++             }
++       QA QB QC QD = {
++                   CASE(
++                       CLEAR & TRN_HL, DELAY(-1,20ns,28ns),
++                       CLOCK & LOADRisHIGH & TRN_LH, DELAY(-1,13ns,24ns),
++                       CLOCK & LOADRisHIGH & TRN_HL, DELAY(-1,18ns,27ns),
++                       CLOCK & LOADRisLO & TRN_LH, DELAY(-1,13ns,24ns),
++                       CLOCK & LOADRisLO & TRN_HL, DELAY(-1,18ns,27ns),
++                       DELAY(-1,21ns,29ns)
++                       )
++                     }
+
+Ucnstr CONSTRAINT(9) VCC GND
++          CLRBAR LOADBAR CLK ENP ENT A B C D
++          IO_LS
++
++      FREQ:
++         NODE = CLK
++         MAXFREQ = 25MEG
++      WIDTH:
++         NODE = CLK
++         MIN_HI = 25ns
++      WIDTH:
++         NODE = CLRBAR
++         MIN_LO = 20n
++      SETUP_HOLD:
++        CLOCK LH = CLK
++        DATA(4) = A B C D
++        SETUPTIME = 20n
++        HOLDTIME = 3n
++        WHEN = { (CLRBAR != '0) }
++      SETUP_HOLD:
++        DATA(3) = LOADBAR ENP ENT
++        CLOCK LH = CLK
++        SETUPTIME = 20NS
++      SETUP_HOLD:
++        DATA(1) = CLRBAR
++        CLOCK LH = CLK
++        SETUPTIME = 25NS
+
+.ENDS 74LS160A
