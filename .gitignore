@@ -2,3 +2,5 @@ lab*/lab*-backups/
 ~*.lck
 *auto*save*
 report
+*.gv
+*.gv.*
